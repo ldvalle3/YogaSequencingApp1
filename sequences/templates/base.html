@@ -55,6 +55,7 @@
           {% endif %}
       </div>
     </nav>
+<<<<<<< HEAD
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
            {% for category, message in messages %}
@@ -65,6 +66,18 @@
                   {{ message }}
               </div>
            {% endfor %}
+=======
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert-{{ category }}">
+                    <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                </div>
+            {%  endfor %}
+>>>>>>> e5f113b16a8dbe1cc22164f91337a962009b75f6
         {% endif %}
       {% endwith %}
       {% block content %}
