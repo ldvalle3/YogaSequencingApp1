@@ -25,11 +25,7 @@
                 <a class="nav-link" href="{{ url_for('home_page') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-
                 <a class="nav-link" href="{{ url_for('sequencing_page') }}">Sequencing</a>
-
-                <a class="nav-link" href="{{ url_for('market_page') }}">Market</a>
-
             </li>
         </ul>
           {% if current_user.is_authenticated %}
@@ -44,11 +40,7 @@
                     <a class="nav-link">Welcome, {{ current_user.username }}</a>
                 </li>
                 <li class="nav-item">
-
                     <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
-
-                    <a class="nav-link" href="#">Logout</a>
-
                 </li>
             </ul>
           {% else %}
@@ -63,7 +55,7 @@
           {% endif %}
       </div>
     </nav>
-
+<<<<<<< HEAD
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
            {% for category, message in messages %}
@@ -74,7 +66,7 @@
                   {{ message }}
               </div>
            {% endfor %}
-
+=======
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -85,7 +77,7 @@
                     {{ message }}
                 </div>
             {%  endfor %}
-
+>>>>>>> e5f113b16a8dbe1cc22164f91337a962009b75f6
         {% endif %}
       {% endwith %}
       {% block content %}
