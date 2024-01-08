@@ -1,5 +1,10 @@
+
+from sequences import db, app, login_manager
+from sequences import bcrypt
+
 from market import db, app, login_manager
 from market import bcrypt
+
 from flask_login import UserMixin
 
 

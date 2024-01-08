@@ -5,10 +5,7 @@ from sequences.models import User
 
 
 class RegisterForm(FlaskForm):
-<<<<<<< HEAD
 
-=======
->>>>>>> e5f113b16a8dbe1cc22164f91337a962009b75f6
     def validate_username(self, username_to_check):
         user = User.query.filter_by(username=username_to_check.data).first()
         if user:

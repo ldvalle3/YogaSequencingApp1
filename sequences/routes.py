@@ -3,7 +3,9 @@ from flask import render_template, redirect, url_for, flash
 from sequences.models import Item, User
 from sequences.forms import RegisterForm, LoginForm
 from sequences import db
+from flask_login import login_user, logout_user, login_required
 from flask_login import login_user, logout_user
+
 
 
 @app.route('/')
@@ -27,14 +29,11 @@ def register_page():
                               password=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
-        return redirect(url_for('market_page'))
+        return redirect(url_for('sequencing_page'))
     if form.errors != {}:  # if there are not errors from the validations
         for err_msg in form.errors.values():
-<<<<<<< HEAD
             flash(f"There was an error with creating a user: {err_msg}", category='danger')
-=======
             flash(f"There was an error with creating a user: {err_msg}")
->>>>>>> e5f113b16a8dbe1cc22164f91337a962009b75f6
     return render_template('register.html', form=form)
 
 
@@ -50,3 +49,11 @@ def login_page():
         else:
             flash('Username and password do not match! Please try again!', category='danger')
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout_page():
+    logout_user()
+    flash("You have been logged out.", category='info')
+    return redirect(url_for('home_page'))
+
