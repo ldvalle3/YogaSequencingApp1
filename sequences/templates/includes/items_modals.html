@@ -33,7 +33,7 @@
 </div>
 
 <!-- Purchase Confirm -->
-<div class="modal fade" id="Modal-PurchaseConfirm-{{ item.id }}"
+<div class="modal fade" id="Modal-AddConfirm-{{ item.id }}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,17 +50,17 @@
       </div>
       <div class="modal-body">
         <form method="POST">
-          {{ purchase_form.hidden_tag() }}
+          {{ add_form.hidden_tag() }}
           <h4 class="text-center">
-            Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
+            Are you sure you want to add {{ item.name }} ?
           </h4>
           <br>
           <h6 class="text-center">
-            By clicking Purchase, you will purchase this item.
+            By clicking the pose, you will add it to your sequence
           </h6>
           <br>
-          <input id="purchased_item" name="purchased_item" type="hidden" value="{{item.name}}">
-          {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
+          <input id="added_item" name="added_item" type="hidden" value="{{item.name}}">
+          {{ add_form.submit(class="btn btn-outline-success btn-block") }}
         </form>
       </div>
       <div class="modal-footer">

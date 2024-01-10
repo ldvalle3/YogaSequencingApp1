@@ -4,11 +4,14 @@
 {% endblock %}
 
 {% block content %}
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark" style="color:white">
+    <div class="rounded position-relative overflow-hidden p-6 p-md-4 m-md-3 text-center bg-secondary" style="color:white">
+
         <div class="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">Jim Shaped Coding Market</h1>
-            <p class="lead font-weight-normal">Start purchasing products by clicking the link below</p>
-            <a class="btn btn-primary" href="{{ url_for('sequencing_page') }}">Get Started</a>
+            <img class="home-image" src="../static/images/yogalogo.png" alt="" width="320" height="320">
+
+            <h1 class="display-4 font-weight-normal">Intention Meets Sequencing</h1>
+            <p class="lead font-weight-normal">Start by clicking the link below!</p>
+            <a class="btn btn-info" href="{{ url_for('sequencing_page') }}">Get Started</a>
         </div>
         <div class="product-device box-shadow d-none d-md-block"></div>
         <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
