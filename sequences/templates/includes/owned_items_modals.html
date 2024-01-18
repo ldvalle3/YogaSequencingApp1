@@ -1,10 +1,10 @@
 <style>
   .modal-content {
-    background-color: #212121
+    background-color: #333333
   }
 </style>
 
-<!-- Selling Confirm -->
+<!-- Adding Confirm -->
 <div class="modal fade" id="Modal-RemoveConfirm-{{ owned_item.id }}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -27,12 +27,8 @@
             Are you sure you want to remove {{ owned_item.name }}?
           </h4>
           <br>
-          <h6 class="text-center">
-            By clicking remove, you will remove this pose from your sequence
-          </h6>
-          <br>
           <input id="removed_item" name="removed_item" type="hidden" value="{{owned_item.name}}">
-          {{ remove_form.submit(class="btn btn-outline-danger btn-block") }}
+          {{ remove_form.submit(class="btn btn-outline-info btn-block") }}
         </form>
       </div>
       <div class="modal-footer">

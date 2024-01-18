@@ -1,6 +1,6 @@
 <style>
   .modal-content {
-    background-color: #212121
+    background-color: #333333
   }
 </style>
 
@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<!-- Purchase Confirm -->
+<!-- Add Confirm -->
 <div class="modal fade" id="Modal-AddConfirm-{{ item.id }}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,12 +55,8 @@
             Are you sure you want to add {{ item.name }} ?
           </h4>
           <br>
-          <h6 class="text-center">
-            By clicking the pose, you will add it to your sequence
-          </h6>
-          <br>
           <input id="added_item" name="added_item" type="hidden" value="{{item.name}}">
-          {{ add_form.submit(class="btn btn-outline-success btn-block") }}
+          {{ add_form.submit(class="btn btn-outline-info btn-block") }}
         </form>
       </div>
       <div class="modal-footer">

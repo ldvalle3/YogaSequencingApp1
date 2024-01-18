@@ -14,28 +14,6 @@ def home_page():
 @app.route('/sequencing', methods=['GET', 'POST'])
 @login_required
 def sequencing_page():
-    items = [
-        {'id': 1, 'name': 'Childs Pose', 'sanskrit': 'Balasana', 'level': 'Beginner',
-         'focus': 'Forward Bend, Hip-Opening, and Restorative', 'image': '../static/images/childs-pose.jpg'},
-        {'id': 2, 'name': 'Cobra Pose', 'sanskrit': 'Bhujangasana', 'level': 'Beginner',
-         'focus': 'Chest-Opening and Backbend', 'image': '../static/images/cobra-pose.jpg'},
-        {'id': 3, 'name': 'Extended Side Angle', 'sanskrit': 'Utthita Parsvakonasana', 'level': 'Beginner',
-         'focus': 'Standing and Strengthening', 'image': '../static/images/extended-side-angle.jpg'},
-        {'id': 4, 'name': 'Forward Fold', 'sanskrit': 'Padangusthasana', 'level': 'Beginner',
-         'focus': 'Forward Bend and Standing', 'image': '../static/images/forward-fold.jpg'},
-        {'id': 5, 'name': 'Halfway Lift', 'sanskrit': 'Ardha Uttanasana', 'level': 'Beginner',
-         'focus': 'Forward Bend and Standing', 'image': '../static/images/halfway-lift.jpg'},
-        {'id': 6, 'name': 'Mountain Pose', 'sanskrit': 'Tadasana', 'level': 'Beginner',
-         'focus': 'Standing', 'image': '../static/images/mountain-pose.jpg'},
-        {'id': 7, 'name': 'Cat Pose', 'sanskrit': 'Marjaryasana', 'level': 'Beginner',
-         'focus': 'Core', 'image': '../static/images/cat-pose.jpg'},
-        {'id': 8, 'name': 'Triangle', 'sanskrit': 'Utthita Trikonasana', 'level': 'Beginner',
-         'focus': 'Standing and Strengthening', 'image': '../static/images/triangle.jpg'},
-        {'id': 9, 'name': 'Warrior I', 'sanskrit': 'Virabhadrasana I', 'level': 'Beginner',
-         'focus': 'Standing and Strengthening', 'image': '../static/images/warrior-I.jpg'},
-        {'id': 10, 'name': 'Warrior II', 'sanskrit': 'Virabhadrasana II', 'level': 'Beginner',
-         'focus': 'Strengthening, Balancing, and Standing', 'image': '../static/images/warrior-II.jpg'}
-    ]
     add_form = AddItemForm()
     remove_form = RemoveItemForm()
     if request.method == "POST":
@@ -43,6 +21,7 @@ def sequencing_page():
         added_item = request.form.get('added_item')
         a_item_object = Item.query.filter_by(name=added_item).first()
         if a_item_object:
+            a_item_object.add(current_user)
             flash(f"You have added {a_item_object.name} ",
                   category='success')
 
@@ -54,7 +33,11 @@ def sequencing_page():
             flash(f"You have removed {s_item_object.name}", category='success')
         return redirect(url_for('sequencing_page'))
 
-    return render_template('sequencing.html', items=items)
+    if request.method == "GET":
+        items = Item.query.filter_by(owner=None).all()
+        owned_items = Item.query.filter_by(owner=current_user.id).all()
+        return render_template('sequencing.html', items=items, add_form=add_form, owned_items=owned_items,
+                               remove_form=remove_form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -86,7 +69,7 @@ def login_page():
         ):
             login_user(attempted_user)
             flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
-            return redirect(url_for('market_page'))
+            return redirect(url_for('sequencing_page'))
         else:
             flash('Username and password are not match! Please try again', category='danger')
 
