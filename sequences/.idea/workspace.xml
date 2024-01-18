@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52603394-f7d4-4f5a-b5a4-ff3d39153aa4" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/static/images/LotusFlower.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/images/brilliance.svg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/images/cat-pose.jpg" afterDir="false" />
@@ -15,6 +16,10 @@
       <change afterPath="$PROJECT_DIR$/static/images/warrior-I.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/static/images/warrior-II.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../instance/sequencing.db" beforeDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/templates/includes/owned_items_modals.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
       <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes.py" afterDir="false" />
@@ -24,7 +29,10 @@
       <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/sequencing.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/sequencing.html" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/templates/yogalogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/yogalogo.png" afterDir="false" />
+=======
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +42,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+<<<<<<< HEAD
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
+=======
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
   <component name="ProjectId" id="2agUG9Bztq8KwRSiriSj7GLRn1r" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -46,7 +60,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "main",
+=======
+    "git-widget-placeholder": "Merging LissetteValle",
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
     "last_opened_file_path": "/Users/lissettevalle/YogaSequencingApp/sequences",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
@@ -93,7 +111,10 @@
       <option name="presentableId" value="Default" />
       <updated>1704739617237</updated>
       <workItem from="1704739618652" duration="13000" />
+<<<<<<< HEAD
       <workItem from="1704822621018" duration="25000" />
+=======
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
     </task>
     <servers />
   </component>

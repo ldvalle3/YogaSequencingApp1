@@ -1,6 +1,10 @@
 <style>
   .modal-content {
+<<<<<<< HEAD
     background-color: #333333
+=======
+    background-color: #212121
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
   }
 </style>
 
@@ -32,8 +36,13 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- Add Confirm -->
 <div class="modal fade" id="Modal-AddConfirm-{{ item.id }}"
+=======
+<!-- Purchase Confirm -->
+<div class="modal fade" id="Modal-PurchaseConfirm-{{ item.id }}"
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,6 +59,7 @@
       </div>
       <div class="modal-body">
         <form method="POST">
+<<<<<<< HEAD
           {{ add_form.hidden_tag() }}
           <h4 class="text-center">
             Are you sure you want to add {{ item.name }} ?
@@ -57,6 +67,19 @@
           <br>
           <input id="added_item" name="added_item" type="hidden" value="{{item.name}}">
           {{ add_form.submit(class="btn btn-outline-info btn-block") }}
+=======
+          {{ purchase_form.hidden_tag() }}
+          <h4 class="text-center">
+            Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
+          </h4>
+          <br>
+          <h6 class="text-center">
+            By clicking Purchase, you will purchase this item.
+          </h6>
+          <br>
+          <input id="purchased_item" name="purchased_item" type="hidden" value="{{item.name}}">
+          {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
         </form>
       </div>
       <div class="modal-footer">

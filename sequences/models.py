@@ -16,6 +16,16 @@ class User(db.Model, UserMixin):
     items = db.relationship('Item', backref='owned_user', lazy=True)
 
     @property
+<<<<<<< HEAD
+=======
+    def prettier_budget(self):
+        if len(str(self.budget)) >= 4:
+            return f'${str(self.budget)[:-3]},{str(self.budget)[-3:]}'
+        else:
+            return f"{self.budget} $"
+
+    @property
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
     def password(self):
         return self.password
 
@@ -30,12 +40,19 @@ class User(db.Model, UserMixin):
 class Item(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=30), nullable=False, unique=True)
+<<<<<<< HEAD
     sanskrit = db.Column(db.String(length=30), nullable=False, unique=True)
     level = db.Column(db.String(length=12), nullable=False)
     focus = db.Column(db.String(length=1024), nullable=False)
     alignment = db.Column(db.String(length=30), nullable=False, unique=True)
     description = db.Column(db.String(length=1024), nullable=False, unique=True)
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
+=======
+    price = db.Column(db.Integer(), nullable=False)
+    barcode = db.Column(db.String(length=12), nullable=False, unique=True)
+    description = db.Column(db.String(length=1024), nullable=False, unique=True)
+    owner = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
 
     def __repr__(self):
         return f'Item {self.name}'

@@ -5,6 +5,7 @@ from sequences.models import User
 
 
 class RegisterForm(FlaskForm):
+
     def validate_username(self, username_to_check):
         user = User.query.filter_by(username=username_to_check.data).first()
         if user:
@@ -24,6 +25,7 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(label='User Name:', validators=[DataRequired()])
+<<<<<<< HEAD
     password = PasswordField(label='Password:', validators=[DataRequired()])
     submit = SubmitField(label='Sign in')
 
@@ -34,3 +36,7 @@ class AddItemForm(FlaskForm):
 
 class RemoveItemForm(FlaskForm):
     submit = SubmitField(label='Remove Pose')
+=======
+    password = StringField(label='Password:', validators=[DataRequired()])
+    submit = SubmitField(label='Sign in')
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924

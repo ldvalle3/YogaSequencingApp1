@@ -1,11 +1,20 @@
 <style>
   .modal-content {
+<<<<<<< HEAD
     background-color: #333333
   }
 </style>
 
 <!-- Adding Confirm -->
 <div class="modal fade" id="Modal-RemoveConfirm-{{ owned_item.id }}"
+=======
+    background-color: #212121
+  }
+</style>
+
+<!-- Selling Confirm -->
+<div class="modal fade" id="Modal-SellingConfirm-{{ owned_item.id }}"
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -22,6 +31,7 @@
       </div>
       <div class="modal-body">
         <form method="POST">
+<<<<<<< HEAD
           {{ remove_form.hidden_tag() }}
           <h4 class="text-center">
             Are you sure you want to remove {{ owned_item.name }}?
@@ -29,6 +39,19 @@
           <br>
           <input id="removed_item" name="removed_item" type="hidden" value="{{owned_item.name}}">
           {{ remove_form.submit(class="btn btn-outline-info btn-block") }}
+=======
+          {{ selling_form.hidden_tag() }}
+          <h4 class="text-center">
+            Are you sure you want to sell {{ owned_item.name }} for {{ owned_item.price }}$ ?
+          </h4>
+          <br>
+          <h6 class="text-center">
+            By clicking Sell, you will put this item back on market
+          </h6>
+          <br>
+          <input id="sold_item" name="sold_item" type="hidden" value="{{owned_item.name}}">
+          {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
+>>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
         </form>
       </div>
       <div class="modal-footer">
