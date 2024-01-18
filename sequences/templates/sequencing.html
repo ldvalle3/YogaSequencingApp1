@@ -4,7 +4,6 @@ Sequencing Page
 {% endblock %}
 {% block content %}
 
-<<<<<<< HEAD
  <style>
     /* Custom CSS for gradient background */
     .gradient-card {
@@ -20,29 +19,24 @@ Sequencing Page
        <p>Click on one of the poses to start creating your sequence</p>
        <br>
       <table class="table table-hover table-secondary">
-=======
+
 <div class="row" style="margin-top:20px; margin-left:20px">
    <div class="col-8">
        <h2>Available items on the Market</h2>
        <p>Click on one of the items to start buying</p>
        <br>
       <table class="table table-hover table-dark">
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
          <thead>
             <tr>
                 <th scope="col">Name</th>
-<<<<<<< HEAD
                 <th scope="col">Sanskrit</th>
                 <th scope="col">Level</th>
                 <th scope="col">Focus</th>
                 <th scope="col">Alignment</th>
                 <th scope="col">Options</th>
-=======
                 <th scope="col">Description</th>
                 <th scope="col">Level</th>
                 <th scope="col">Focus</th>
-
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
             </tr>
         </thead>
         <tbody>
@@ -51,7 +45,6 @@ Sequencing Page
             {% include 'includes/items_modals.html' %}
             <tr>
                 <td>{{ item.name }}</td>
-<<<<<<< HEAD
                 <td>{{ item.sanskrit }}</td>
                 <td>{{ item.level }}</td>
                 <td>{{ item.focus }}</td>
@@ -59,14 +52,12 @@ Sequencing Page
                 <td>
                    <button class="btn btn-outline btn-secondary" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">More Info</button>
                   <button class="btn btn-outline btn-info mt-2" data-toggle="modal" data-target="#Modal-AddConfirm-{{ item.id }}">Add Pose</button>
-=======
                 <td>{{ item.description }}</td>
                 <td>{{ item.level }}</td>
                 <td>{{ item.focus }}</td>
                 <td>
                    <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">More Info</button>
                   <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{ item.id }}">Purchase this Item</button>
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
                </td>
             </tr>
             {% endfor %}
@@ -74,7 +65,6 @@ Sequencing Page
       </table>
    </div>
    <div class="col-4">
-<<<<<<< HEAD
         <h2>Your Sequence:</h2>
         <br>
         <div class="column">
@@ -88,7 +78,6 @@ Sequencing Page
                                   data-toggle="modal" data-target="#Modal-RemoveConfirm-{{ owned_item.id }}">
                               Remove this pose
                           </button>
-=======
         <h2>Owned Items</h2>
         <p>Click on sell item to put an item back on the Market</p>
         <br>
@@ -106,16 +95,9 @@ Sequencing Page
                           <p class="card-text"><strong>
                               This item costs {{ owned_item.price }}$
                           </strong></p>
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
                       </div>
                   </div>
              </div>
            {% endfor %}
         </div>
    </div>
-</div>
-<<<<<<< HEAD
-{% endblock %}
-=======
-{% endblock %}
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924

@@ -7,10 +7,9 @@ Register Page
     <div class="container">
     <form method="POST" class="form-register" style="color:white">
         {{ form.hidden_tag() }}
-<<<<<<< HEAD
+
         <img class="home-image" src="../static/images/LotusFlower.png" alt="" width="320" height="320">
-=======
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
+
         <h1 class="h3 mb-3 font-weight-normal">
             <br>
             Please Create your Account
@@ -29,24 +28,14 @@ Register Page
         {{ form.password2(class="form-control", placeholder="Confirm Password") }}
 
         <br>
-<<<<<<< HEAD
 
         {{ form.submit(class="btn-lg btn-block btn-info") }}
 
         <br>
-
-=======
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
         <div class="checkbox mb-3">
             <h6>Already have an account?</h6>
             <a class="btn btn-sm btn-secondary" href="{{ url_for('login_page') }}">Login</a>
         </div>
-
-
-<<<<<<< HEAD
-=======
-        {{ form.submit(class="btn-lg btn-block btn-primary") }}
->>>>>>> af18db9b4973e3b92beddf2c27a85823c9077924
     </form>
     </div>
 </body>
