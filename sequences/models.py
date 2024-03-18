@@ -40,7 +40,7 @@ class Item(db.Model):
     def __repr__(self):
         return f'Item {self.name}'
 
-    def add(self, user=None):
+    def add(self, user):
         if user:
             self.owner = user.id
         else:
@@ -49,7 +49,7 @@ class Item(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def remove(self, user):
+    def remove(self):
         self.owner = None
         db.session.commit()
 
