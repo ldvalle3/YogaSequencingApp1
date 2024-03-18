@@ -4,12 +4,8 @@
   }
 </style>
 
-<!-- Adding Confirm -->
-<div class="modal fade" id="Modal-RemoveConfirm-{{ owned_item.id }}"></div>
-<!-- background-color: #212121 -->
-
-<!-- Selling Confirm -->
-<div class="modal fade" id="Modal-SellingConfirm-{{ owned_item.id }}"
+<!-- Removal Confirm -->
+<div class="modal fade" id="Modal-RemoveConfirm-{{ owned_item.id }}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -33,17 +29,7 @@
           <br>
           <input id="removed_item" name="removed_item" type="hidden" value="{{owned_item.name}}">
           {{ remove_form.submit(class="btn btn-outline-info btn-block") }}
-          {{ selling_form.hidden_tag() }}
-          <h4 class="text-center">
-            Are you sure you want to sell {{ owned_item.name }} for {{ owned_item.price }}$ ?
-          </h4>
           <br>
-          <h6 class="text-center">
-            By clicking Sell, you will put this item back on market
-          </h6>
-          <br>
-          <input id="sold_item" name="sold_item" type="hidden" value="{{owned_item.name}}">
-          {{ selling_form.submit(class="btn btn-outline-danger btn-block") }}
         </form>
       </div>
       <div class="modal-footer">

@@ -34,8 +34,6 @@
 
 <!-- Add Confirm -->
 <div class="modal fade" id="Modal-AddConfirm-{{ item.id }}">
-<!-- Purchase Confirm -->
-<div class="modal fade" id="Modal-PurchaseConfirm-{{ item.id }}"
 
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,17 +58,6 @@
           <br>
           <input id="added_item" name="added_item" type="hidden" value="{{item.name}}">
           {{ add_form.submit(class="btn btn-outline-info btn-block") }}
-          {{ purchase_form.hidden_tag() }}
-          <h4 class="text-center">
-            Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
-          </h4>
-          <br>
-          <h6 class="text-center">
-            By clicking Purchase, you will purchase this item.
-          </h6>
-          <br>
-          <input id="purchased_item" name="purchased_item" type="hidden" value="{{item.name}}">
-          {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
         </form>
       </div>
       <div class="modal-footer">
