@@ -1,5 +1,5 @@
-from sequences import app, db
-from flask import render_template, redirect, url_for, flash, request
+from sequences import app, db, auth0
+from flask import render_template, redirect, url_for, flash, request, session
 from sequences.models import Item, User
 from sequences.forms import RegisterForm, LoginForm, AddItemForm, RemoveItemForm
 from flask_login import login_user, logout_user, login_required, current_user
@@ -74,6 +74,30 @@ def login_page():
             flash('Username and password are not match! Please try again', category='danger')
 
     return render_template('login.html', form=form)
+
+
+@app.route('/auth0_login')
+def auth0_login():
+    return auth0.authorize_redirect(redirect_uri='http://127.0.0.1:5000/callback',
+                                    audience='https://dev-b1chlna5prtx13oi.us.auth0.com/api/v2/')
+
+
+@app.route('/callback', methods=['GET', 'POST'])
+def callback():
+    auth0.authorize_access_token()
+    resp = auth0.get('userinfo')
+    userinfo = resp.json()
+
+    user = User.query.filter_by(email_address=userinfo['email']).first()
+    if not user:
+        # Create a new user if not exists
+        user = User(username=userinfo['name'], email_address=userinfo['email'])
+        db.session.add(user)
+        db.session.commit()
+
+    login_user(user)
+    flash(f'You are logged in as {user.username}', category='success')
+    return redirect(url_for('sequencing_page'))
 
 
 @app.route('/logout')

@@ -25,10 +25,18 @@
 
             <br>
 
+                <!-- Auth0 login button -->
+             <div class="auth0-button">
+                <a href="{{ url_for('auth0_login') }}" class="btn btn-lg btn-block btn-auth0">Log in with Auth0</a>
+            </div>
+
             <div class="checkbox mb-3">
                <h6>Do you not have an account?</h6>
                <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Register</a>
             </div>
+
+
+
         </form>
     </div>
 </body>
