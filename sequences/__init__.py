@@ -6,7 +6,7 @@ from authlib.integrations.flask_client import OAuth
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sequencing.db'
-app.config['SECRET_KEY'] = '54a1e3f43f06dba85aa820ea'
+app.config['SECRET_KEY'] = 'your_secret_key'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)

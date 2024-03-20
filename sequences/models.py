@@ -8,7 +8,6 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
@@ -53,6 +52,12 @@ class Item(db.Model):
     def remove(self, user):
         self.owner = None
         db.session.commit()
+
+
+class Sequence(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 with app.app_context():

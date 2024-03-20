@@ -1,8 +1,10 @@
-from sequences import app, db, auth0
-from flask import render_template, redirect, url_for, flash, request, session
-from sequences.models import Item, User
+from sequences import app, db, auth0, login_manager
+from flask import render_template, redirect, url_for, flash, request, session, jsonify
+from sequences.models import Item, User, Sequence
 from sequences.forms import RegisterForm, LoginForm, AddItemForm, RemoveItemForm
 from flask_login import login_user, logout_user, login_required, current_user
+import jwt
+from datetime import datetime, timedelta
 
 
 @app.route('/')
@@ -67,12 +69,18 @@ def login_page():
         if attempted_user and attempted_user.check_password_correction(
                 attempted_password=form.password.data
         ):
-            login_user(attempted_user)
+            # Generate JWT token
+            payload = {'user_id': attempted_user.id, 'exp': datetime.utcnow() + timedelta(minutes=30)}
+            token = jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            # Store token in session
+            session['token'] = token
             flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
             return redirect(url_for('sequencing_page'))
         else:
-            flash('Username and password are not match! Please try again', category='danger')
-
+            flash('Username and password do not match', category='danger')
+            # If form submission fails or validation fails, render login page
+        return render_template('login.html', form=form)
+    # If the form is not submitted or not valid, render the login page
     return render_template('login.html', form=form)
 
 
@@ -105,3 +113,44 @@ def logout_page():
     logout_user()
     flash("You have been logged out!", category='info')
     return redirect(url_for("home_page"))
+
+
+# Protected route that requires JWT token
+@app.route('/protected', methods=['GET'])
+def protected():
+    # Verify JWT token
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'error': 'Missing token'}), 401
+
+    try:
+        payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        return jsonify({'message': 'Access granted', 'username': payload['username']}), 200
+    except jwt.ExpiredSignatureError:
+        return jsonify({'error': 'Token has expired'}), 401
+    except jwt.InvalidTokenError:
+        return jsonify({'error': 'Invalid token'}), 401
+
+
+@app.route('/save_sequence', methods=['POST'])
+@login_required
+def save_sequence():
+    sequence_data = request.json
+    name = sequence_data['name']
+    # Save sequence to the database, associating it with the current user
+    sequence = Sequence(name=name, user_id=current_user.id)
+    db.session.add(sequence)
+    db.session.commit()
+    return jsonify({'message': 'Sequence saved successfully'})
+
+
+@app.route('/saved_sequences')
+@login_required
+def saved_sequences():
+    user_sequences = Sequence.query.filter_by(user_id=current_user.id).all()
+    return render_template('saved_sequences.html', sequences=user_sequences)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))

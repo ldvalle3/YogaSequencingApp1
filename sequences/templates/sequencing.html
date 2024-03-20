@@ -16,7 +16,7 @@ Sequencing Page
 <div class="row" style="margin-top:20px; margin-left:20px">
     <div class="col-8">
        <h2>Poses to add to your sequence!</h2>
-       <p>Click on one of the poses to start creating your sequence</p>
+       <p>Click on a pose to start creating your sequence</p>
        <br>
       <table class="table table-hover table-secondary">
          <thead>
@@ -65,8 +65,9 @@ Sequencing Page
                       </div>
                   </div>
              </div>
-           {% endfor %}
+           {% endfor %}<button type="button" class="btn btn-outline-light"><a href="{{ url_for('saved_sequences') }}">View Saved Sequences</a></button>
             </div>
         </div>
+
    </div>
 {% endblock %}

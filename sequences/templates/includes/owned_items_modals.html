@@ -24,7 +24,7 @@
         <form method="POST">
           {{ remove_form.hidden_tag() }}
           <h4 class="text-center">
-            Are you sure you want to remove {{ owned_item.name }}?
+            You want to remove {{ owned_item.name }}?
           </h4>
           <br>
           <input id="removed_item" name="removed_item" type="hidden" value="{{owned_item.name}}">

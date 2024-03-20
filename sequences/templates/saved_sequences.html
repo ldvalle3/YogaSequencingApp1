@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+Saved Sequences
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Your Saved Sequences</h1>
+    <div class="row">
+        {% for sequence in sequences %}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sequence.name }}</h5>
+                    <!-- Display other sequence details as needed -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
