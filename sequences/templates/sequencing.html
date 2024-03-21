@@ -11,6 +11,16 @@ Sequencing Page
       color: #fdfdfc; /* Text color */
       border: none;
     }
+    .custom-btn {
+        background-color: white;
+        color: #45a7be;
+        border: none;
+    }
+
+    .custom-btn:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
   </style>
 
 <div class="row" style="margin-top:20px; margin-left:20px">
@@ -65,7 +75,7 @@ Sequencing Page
                       </div>
                   </div>
              </div>
-           {% endfor %}<button type="button" class="btn btn-outline-light"><a href="{{ url_for('saved_sequences') }}">View Saved Sequences</a></button>
+           {% endfor %}<a href="{{ url_for('saved_sequences') }}" class="btn custom-btn" style="margin-top: 10px; margin-left: 22px">Saved Sequence</a>
             </div>
         </div>
 

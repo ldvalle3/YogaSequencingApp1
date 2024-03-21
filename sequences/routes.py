@@ -147,8 +147,11 @@ def save_sequence():
 @app.route('/saved_sequences')
 @login_required
 def saved_sequences():
-    user_sequences = Sequence.query.filter_by(user_id=current_user.id).all()
-    return render_template('saved_sequences.html', sequences=user_sequences)
+    # Retrieve the user's selected items from the database
+    user_sequences = Item.query.filter_by(owner=current_user.id).all()
+
+    # Render the template and pass the user's selected items
+    return render_template('saved_sequences.html', user_sequences=user_sequences)
 
 
 @login_manager.user_loader

@@ -4,12 +4,33 @@ Saved Sequences
 {% endblock %}
 {% block content %}
 
+ <style>
+    /* Custom CSS for gradient background */
+    .gradient-card {
+        background: linear-gradient(to right, #45a7be, #ffa600); /* Change the gradient colors */
+        color: #fdfdfc; /* Text color */
+        border: none;
+    }
+        .custom-btn {
+        background-color: white;
+        color: #45a7be;
+        border: none;
+    }
+
+    .custom-btn:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
+  </style>
 <div class="container">
-    <h1>Your Saved Sequences</h1>
-    <div class="row">
-        {% for sequence in sequences %}
-        <div class="col-md-4">
-            <div class="card">
+    <div class="row justify-content-center">
+<div class="col-4 " style="margin-top: 20px;">
+    <h3 style="font-family: Arial" >Your Sequence:</h3>
+    <br>
+    <div class="column">
+        {% for sequence in user_sequences %}
+        <div class="col-md-4 mb-4">
+            <div style="margin-bottom: 5px; width: 200px;" class="card text-center gradient-card">
                 <div class="card-body">
                     <h5 class="card-title">{{ sequence.name }}</h5>
                     <!-- Display other sequence details as needed -->
@@ -18,6 +39,8 @@ Saved Sequences
         </div>
         {% endfor %}
     </div>
+    <button class="btn custom-btn" onclick="window.history.back()">Back to Sequencing Page</button>
 </div>
-
+</div>
+</div>
 {% endblock %}
