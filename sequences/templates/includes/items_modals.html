@@ -1,70 +1,46 @@
-<style>
-  .modal-content {
-    background-color: #333333
-  }
-</style>
-
-<!-- More Info -->
-<div class="modal fade" id="Modal-MoreInfo-{{ item.id }}"
-     tabindex="-1"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">
-          <!-- -->
-          {{ item.name }}
-        </h5>
-        <button type="button" class="close"
-                data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{ item.description }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add Confirm -->
-<div class="modal fade" id="Modal-AddConfirm-{{ item.id }}">
-
-     tabindex="-1"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">
-          <!-- -->
-          {{ item.name }}
-        </h5>
-        <button type="button" class="close"
-                data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST">
-          {{ add_form.hidden_tag() }}
-          <h4 class="text-center">
-            You want to add {{ item.name }} ?
-          </h4>
-          <br>
-          <input id="added_item" name="added_item" type="hidden" value="{{item.name}}">
-          {{ add_form.submit(class="btn btn-outline-info btn-block") }}
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">Close
-        </button>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoga Sequence App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+  <style>
+    .modal-content {
+      background-color: #333333;
+      color: #ffffff;
+    }
+    .btn-close {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <!-- More Info Modals -->
+  {% for item in items %}
+  <div class="modal fade" id="Modal-MoreInfo-{{ item.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">{{ item.name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{ item.description }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  {% endfor %}
+
+  <!-- Add Confirm Modals -->
+  {% for item in items %}
+  <div class="modal fade" id="Modal-AddConfirm-{{ item.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">{{ item.name }}</h5>
+          <button type="button"

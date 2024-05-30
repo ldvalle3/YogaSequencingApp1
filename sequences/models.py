@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
-    items = db.relationship('Item', backref='owned_user', lazy=True)
+    sequences = db.relationship('Item', backref='owned_user', lazy=True)
 
     @property
     def password(self):
@@ -57,7 +57,15 @@ class Item(db.Model):
 class Sequence(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    items = db.relationship('SequenceItem', backref='sequence', lazy=True)
+
+class SequenceItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sequence_id = db.Column(db.Integer, db.ForeignKey('sequence.id'), nullable=False)
+    item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
+    item = db.relationship('Item')
+
 
 
 with app.app_context():

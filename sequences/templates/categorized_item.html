@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Categorized Items by Level
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Items Categorized by Level</h2>
+    {% for level, items in categorized_items.items() %}
+        <h3>{{ level }} Level</h3>
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card text-center gradient-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                            <img src="{{ item.alignment }}" alt="{{ item.name }}" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
