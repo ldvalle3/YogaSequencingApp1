@@ -1,0 +1,13 @@
+name: Release Draft
+tags:
+  - 'v*.*.*'
+categories:
+  - title: 'New Features'
+    label: 'enhancement'
+  - title: 'Bug Fixes'
+    label: 'bug'
+
+- name: Draft Release Notes
+  uses: release-drafter/release-drafter@v5
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}

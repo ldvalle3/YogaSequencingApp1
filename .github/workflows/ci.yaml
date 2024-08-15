@@ -53,9 +53,31 @@ jobs:
           source venv/bin/activate
           python manage.py migrate
 
-      - name: Run tests
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+     - name: Run unit tests
         run: |
           source venv/bin/activate
-          pytest
+          pip install pytest pytest-cov
+          pytest --cov=your_module --cov-report=xml --cov-report=html
+          
+     - name: Bump version and create tag
+          id: bump_version
+          run: |
+            source venv/bin/activate
+            bump2version patch  # Change to major or minor as needed
+            git push
+            git push --tags
+
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            coverage.xml
+            htmlcov/
+
+      - name: Lint with flake8
+        run: |
+          source venv/bin/activate
+          pip install flake8
+          flake8 .

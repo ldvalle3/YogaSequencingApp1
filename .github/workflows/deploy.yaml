@@ -1,0 +1,65 @@
+name: CI/CD Pipeline for EC2 Deployment
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      -master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          source venv/bin/activate
+          pip install flake8
+          flake8 .
+
+      - name: Run tests
+        run: |
+          source venv/bin/activate
+          pip install pytest
+          pytest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_USER }}
+        run: |
+          echo "${SSH_PRIVATE_KEY}" > ssh_key
+          chmod 600 ssh_key
+
+      - name: Deploy to EC2
+        env:
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_USER }}
+        run: |
+          scp -i ssh_key -o StrictHostKeyChecking=no -r ./* ${REMOTE_USER}@${REMOTE_HOST}:/Users/lisse/YogaSequencingApp
+          ssh -i ssh_key -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "bash /Users/lisse/YogaSequencingApp/deploy.sh"
