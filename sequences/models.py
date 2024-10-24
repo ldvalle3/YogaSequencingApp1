@@ -1,3 +1,6 @@
+from curses import flash
+import re
+from sqlite3 import IntegrityError
 from sequences import db, app, login_manager
 from sequences import bcrypt
 from flask_login import UserMixin
@@ -15,6 +18,16 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(length=60), nullable=False)
     sequences = db.relationship('Item', backref='owned_user', lazy=True)
 
+    @staticmethod
+    def validate_username(username):
+        if not re.match(r'^[a-zA-Z0-9_]{1,30}$', username):
+            raise ValueError("Username must be alphanumeric and up to 30 characters long.")
+        
+    @staticmethod
+    def validate_email(email):
+        if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+            raise ValueError("Invalid email format.")
+
     @property
     def password(self):
         return self.password
@@ -25,6 +38,18 @@ class User(db.Model, UserMixin):
 
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
+    
+    def save(self):
+        try:
+            self.validate_username(self.username)
+            self.validate_email(self.email_address)
+            db.session.add(self)
+            db.session.commit()
+        except ValueError as e:
+            flash(str(e), 'danger')
+        except IntegrityError:
+            db.session.rollback()
+            flash('Username or email already exists.', 'danger')
 
 
 class Item(db.Model):
@@ -36,6 +61,11 @@ class Item(db.Model):
     alignment = db.Column(db.String(length=30), nullable=False, unique=True)
     description = db.Column(db.String(length=1024), nullable=False, unique=True)
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
+
+    @staticmethod
+    def validate_item_name(name):
+        if not name or len(name) > 30:
+            raise ValueError("Item name must not be empty and must be up to 30 characters long.")
 
     def __repr__(self):
         return f'Item {self.name}'
@@ -52,7 +82,21 @@ class Item(db.Model):
     def remove(self, user):
         self.owner = None
         db.session.commit()
-
+    @staticmethod
+    def validate_item_name(name):
+        if not name or len(name) > 30:
+            raise ValueError("Item name must not be empty and must be up to 30 characters long.")
+    def save(self):
+        try:
+            self.validate_item_name(self.name)
+            self.sanitize_description()  
+            db.session.add(self)
+            db.session.commit()
+        except ValueError as e:
+            flash(str(e), 'danger')
+        except IntegrityError:
+            db.session.rollback()
+            flash('Item with this name already exists.', 'danger')
 
 class Sequence(db.Model):
     id = db.Column(db.Integer, primary_key=True)
