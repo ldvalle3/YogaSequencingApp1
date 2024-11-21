@@ -1,4 +1,5 @@
-from flask import Flask
+from logging.handlers import RotatingFileHandler
+from flask import Flask, logging
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -28,5 +29,19 @@ auth0 = oauth.register(
     },
     discovery_endpoint='https://dev-b1chlna5prtx13oi.us.auth0.com/.well-known/openid-configuration'
 )
+
+# Logging configuration
+if not app.debug:  # Only log in production mode
+    # Log to a file with rotating logs
+    file_handler = RotatingFileHandler('logs/security.log', maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+    ))
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    
+    # Set log level for the app
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Application Startup')
 
 from sequences import routes

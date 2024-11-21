@@ -5,6 +5,8 @@ from sequences.forms import RegisterForm, LoginForm, AddItemForm, RemoveItemForm
 from flask_login import login_user, logout_user, login_required, current_user
 import jwt
 from datetime import datetime, timedelta
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 @app.route('/')
 @app.route('/home')
@@ -55,7 +57,14 @@ def register_page():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
 
     return render_template('register.html', form=form)
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
 
+@app.route('/login', methods=['GET', 'POST'])
+@limiter.limit("5 per minute")  # Limit login attempts to 5 per minute per IP
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
     form = LoginForm()
